@@ -14,7 +14,7 @@ let AC = document.querySelector('.buttonAC');
 let buttonPlus = document.querySelector('.buttonPlus');
 let buttonMinus = document.querySelector('.buttonMinus');
 let buttonMutiply = document.querySelector('.buttonMultiply');
-let buttonDivided = document.querySelector('.buttonDivided');
+let buttonDivide = document.querySelector('.buttonDivided');
 
 let equal = document.querySelector('.buttonEqual');
 
@@ -108,7 +108,7 @@ buttonMutiply.addEventListener('click', ()=>{
         }
     }
 })
-buttonDivided.addEventListener('click', ()=>{
+buttonDivide.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
     if(factor!=='/' && factor != ''){
         result.innerHTML = operation(pendingResult, factor, displayResult);
