@@ -22,12 +22,14 @@ let displayResult = '';
 let factor = '';
 let entryAfterOperator = false;
 let pendingResult = '';
+let log = console.log;
 
 equal.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
     result.innerHTML = operation(pendingResult, factor, displayResult);
-    entryAfterOperator = false;
+    entryAfterOperator = true;
     pendingResult = result.innerHTML;
+    factor = '=';
 })
 
 AC.addEventListener('click', ()=>{
@@ -46,9 +48,13 @@ function isFloat(n) {
 
 buttonPlus.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
-    if(factor!=='+' && factor !== ''){
+    if (factor === '='){
+        factor = '+';
+        pendingResult = result.innerHTML;
+        entryAfterOperator = true;
+    } else if(factor!=='+' && factor !== ''){
         result.innerHTML = operation(pendingResult, factor, displayResult);
-        console.log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
+        log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
         entryAfterOperator = true;
         factor = '+';
         pendingResult = result.innerHTML;
@@ -59,7 +65,7 @@ buttonPlus.addEventListener('click', ()=>{
             entryAfterOperator = true;
         } else {
             result.innerHTML = operation(pendingResult, factor, displayResult);
-            console.log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
+            log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
             entryAfterOperator = true;
             pendingResult = result.innerHTML;
         }
@@ -67,9 +73,13 @@ buttonPlus.addEventListener('click', ()=>{
 })
 buttonMinus.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
-    if(factor!=='-' && factor != ''){
+    if (factor === '='){
+        factor = '-';
+        pendingResult = result.innerHTML;
+        entryAfterOperator = true;
+    } else if(factor!=='-' && factor != ''){
         result.innerHTML = operation(pendingResult, factor, displayResult);
-        console.log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
+        log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
         entryAfterOperator = true;
         factor = '-';
         pendingResult = result.innerHTML;
@@ -80,7 +90,7 @@ buttonMinus.addEventListener('click', ()=>{
             entryAfterOperator = true;
         } else {
             result.innerHTML = operation(pendingResult, factor, displayResult);
-            console.log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
+            log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
             entryAfterOperator = true;
             pendingResult = result.innerHTML;
         }
@@ -89,9 +99,13 @@ buttonMinus.addEventListener('click', ()=>{
 
 buttonMutiply.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
-    if(factor!=='*' && factor != ''){
+    if (factor === '='){
+        factor = '*';
+        pendingResult = result.innerHTML;
+        entryAfterOperator = true;
+    } else if(factor!=='*' && factor != ''){
         result.innerHTML = operation(pendingResult, factor, displayResult);
-        console.log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
+        log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
         entryAfterOperator = true;
         factor = '*';
         pendingResult = result.innerHTML;
@@ -102,7 +116,7 @@ buttonMutiply.addEventListener('click', ()=>{
             entryAfterOperator = true;
         } else {
             result.innerHTML = operation(pendingResult, factor, displayResult);
-            console.log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
+            log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
             entryAfterOperator = true;
             pendingResult = result.innerHTML;
         }
@@ -110,9 +124,13 @@ buttonMutiply.addEventListener('click', ()=>{
 })
 buttonDivide.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
-    if(factor!=='/' && factor != ''){
+    if (factor === '='){
+        factor = '/';
+        pendingResult = result.innerHTML;
+        entryAfterOperator = true;
+    } else if(factor!=='/' && factor != ''){
         result.innerHTML = operation(pendingResult, factor, displayResult);
-        console.log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
+        log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
         entryAfterOperator = true;
         factor = '/';
         pendingResult = result.innerHTML;
@@ -123,7 +141,7 @@ buttonDivide.addEventListener('click', ()=>{
             entryAfterOperator = true;
         } else {
             result.innerHTML = operation(pendingResult, factor, displayResult);
-            console.log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
+            log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
             entryAfterOperator = true;
             pendingResult = result.innerHTML;
         }
