@@ -24,6 +24,50 @@ let entryAfterOperator = false;
 let pendingResult = '';
 let log = console.log;
 
+/*======== FUNCTIONS ===========*/
+function operation(var1, factor, var2){
+    return window.eval(parseFloat(var1) + factor + parseFloat(var2));
+}
+function whichOperator(operator){
+    displayResult = result.innerHTML;
+    if (factor === '='){
+        factor = operator;
+        pendingResult = result.innerHTML;
+        entryAfterOperator = true;
+    } else if(factor!== operator && factor !== ''){
+        result.innerHTML = operation(pendingResult, factor, displayResult);
+        log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
+        entryAfterOperator = true;
+        factor = operator;
+        pendingResult = result.innerHTML;
+    } else {
+        if (pendingResult === '') {
+            factor = operator;
+            pendingResult = result.innerHTML;
+            entryAfterOperator = true;
+        } else {
+            result.innerHTML = operation(pendingResult, factor, displayResult);
+            log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
+            entryAfterOperator = true;
+            pendingResult = result.innerHTML;
+        }
+    }
+}
+function isFloat(n) {
+    return Number(n) === n && n % 1 !== 0;
+}
+function numberEntry(myVar)
+{
+    if (entryAfterOperator === false) {
+        result.innerHTML += myVar;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += myVar;
+        entryAfterOperator = false;
+    }
+}
+/*===========================*/
+/*===EQUAL==CLEAR==COMMA=====*/
 equal.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
     result.innerHTML = operation(pendingResult, factor, displayResult);
@@ -31,213 +75,61 @@ equal.addEventListener('click', ()=>{
     pendingResult = result.innerHTML;
     factor = '=';
 })
-
 AC.addEventListener('click', ()=>{
     factor = '';
     entryAfterOperator = false;
     pendingResult = '';
     result.innerHTML = '';
 })
-
-function operation(var1, factor, var2){
-    return window.eval(parseFloat(var1) + factor + parseFloat(var2));
-}
-function isFloat(n) {
-    return Number(n) === n && n % 1 !== 0;
-}
-
+comma.addEventListener('click', ()=>{
+    if (!isFloat(parseFloat(result.innerHTML)))
+        result.innerHTML += '.';
+})
+/*===========================*/
+/*======= OPERATORS ==========*/
 buttonPlus.addEventListener('click', ()=>{
-    displayResult = result.innerHTML;
-    if (factor === '='){
-        factor = '+';
-        pendingResult = result.innerHTML;
-        entryAfterOperator = true;
-    } else if(factor!=='+' && factor !== ''){
-        result.innerHTML = operation(pendingResult, factor, displayResult);
-        log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
-        entryAfterOperator = true;
-        factor = '+';
-        pendingResult = result.innerHTML;
-    } else {
-        if (pendingResult === '') {
-            factor = '+';
-            pendingResult = result.innerHTML;
-            entryAfterOperator = true;
-        } else {
-            result.innerHTML = operation(pendingResult, factor, displayResult);
-            log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
-            entryAfterOperator = true;
-            pendingResult = result.innerHTML;
-        }
-    }
+    whichOperator('+');
 })
 buttonMinus.addEventListener('click', ()=>{
-    displayResult = result.innerHTML;
-    if (factor === '='){
-        factor = '-';
-        pendingResult = result.innerHTML;
-        entryAfterOperator = true;
-    } else if(factor!=='-' && factor != ''){
-        result.innerHTML = operation(pendingResult, factor, displayResult);
-        log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
-        entryAfterOperator = true;
-        factor = '-';
-        pendingResult = result.innerHTML;
-    } else {
-        if (pendingResult === '') {
-            factor = '-';
-            pendingResult = result.innerHTML;
-            entryAfterOperator = true;
-        } else {
-            result.innerHTML = operation(pendingResult, factor, displayResult);
-            log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
-            entryAfterOperator = true;
-            pendingResult = result.innerHTML;
-        }
-    }
+    whichOperator('-');
 })
-
 buttonMutiply.addEventListener('click', ()=>{
-    displayResult = result.innerHTML;
-    if (factor === '='){
-        factor = '*';
-        pendingResult = result.innerHTML;
-        entryAfterOperator = true;
-    } else if(factor!=='*' && factor != ''){
-        result.innerHTML = operation(pendingResult, factor, displayResult);
-        log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
-        entryAfterOperator = true;
-        factor = '*';
-        pendingResult = result.innerHTML;
-    } else {
-        if (pendingResult === '') {
-            factor = '*';
-            pendingResult = result.innerHTML;
-            entryAfterOperator = true;
-        } else {
-            result.innerHTML = operation(pendingResult, factor, displayResult);
-            log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
-            entryAfterOperator = true;
-            pendingResult = result.innerHTML;
-        }
-    }
+    whichOperator('*');
 })
 buttonDivide.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
-    if (factor === '='){
-        factor = '/';
-        pendingResult = result.innerHTML;
-        entryAfterOperator = true;
-    } else if(factor!=='/' && factor != ''){
-        result.innerHTML = operation(pendingResult, factor, displayResult);
-        log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
-        entryAfterOperator = true;
-        factor = '/';
-        pendingResult = result.innerHTML;
-    } else {
-        if (pendingResult === '') {
-            factor = '/';
-            pendingResult = result.innerHTML;
-            entryAfterOperator = true;
-        } else {
-            result.innerHTML = operation(pendingResult, factor, displayResult);
-            log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
-            entryAfterOperator = true;
-            pendingResult = result.innerHTML;
-        }
-    }
+    whichOperator('/');
 })
+/*===========================*/
+/*==========NUMBERS==========*/
 one.addEventListener('click', ()=>{
-    if(entryAfterOperator === false){
-        result.innerHTML += 1;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 1;
-        entryAfterOperator = false;
-    }
+    numberEntry(1)
 })
 two.addEventListener('click', ()=>{
-    if(entryAfterOperator === false){
-        result.innerHTML += 2;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 2;
-        entryAfterOperator = false;
-    }
+    numberEntry(2)
 })
 three.addEventListener('click', ()=>{
-    if(entryAfterOperator === false){
-        result.innerHTML += 3;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 3;
-        entryAfterOperator = false;
-    }
+    numberEntry(3)
 })
 four.addEventListener('click', ()=>{
-    if(entryAfterOperator === false){
-        result.innerHTML += 4;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 4;
-        entryAfterOperator = false;
-    }
+    numberEntry(4)
 })
 five.addEventListener('click', ()=>{
-    if(entryAfterOperator === false){
-        result.innerHTML += 5;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 5;
-        entryAfterOperator = false;
-    }
+    numberEntry(5)
 })
 six.addEventListener('click', ()=>{
-    if(entryAfterOperator === false){
-        result.innerHTML += 6;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 6;
-        entryAfterOperator = false;
-    }
+    numberEntry(6)
 })
 seven.addEventListener('click', ()=>{
-    if(entryAfterOperator === false){
-        result.innerHTML += 7;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 7;
-        entryAfterOperator = false;
-    }
+    numberEntry(7)
 })
 eight.addEventListener('click', ()=>{
-    if(entryAfterOperator === false){
-        result.innerHTML += 8;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 8;
-        entryAfterOperator = false;
-    }
+    numberEntry(8)
 })
 nine.addEventListener('click', ()=>{
-    if(entryAfterOperator === false){
-        result.innerHTML += 9;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 9;
-        entryAfterOperator = false;
-    }
+    numberEntry(9)
 })
 zero.addEventListener('click', ()=>{
-    if(entryAfterOperator === false){
-        result.innerHTML += 0;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 0;
-        entryAfterOperator = false;
-    }
+    numberEntry(0)
 })
-comma.addEventListener('click', ()=>{
-    if (!isFloat(parseFloat(result.innerHTML)))
-         result.innerHTML += '.';
-})
+/*===========================*/
