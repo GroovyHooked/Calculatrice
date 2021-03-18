@@ -97,7 +97,6 @@ buttonMutiply.addEventListener('click', ()=>{
     whichOperator('*');
 })
 buttonDivide.addEventListener('click', ()=>{
-    displayResult = result.innerHTML;
     whichOperator('/');
 })
 /*===========================*/
