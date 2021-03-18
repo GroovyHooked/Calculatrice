@@ -56,13 +56,13 @@ function whichOperator(operator){
 function isFloat(n) {
     return Number(n) === n && n % 1 !== 0;
 }
-function numberEntry(myVar)
+function numberEntry(number)
 {
     if (entryAfterOperator === false) {
-        result.innerHTML += myVar;
+        result.innerHTML += number;
     } else {
         result.innerHTML = '';
-        result.innerHTML += myVar;
+        result.innerHTML += number;
         entryAfterOperator = false;
     }
 }
