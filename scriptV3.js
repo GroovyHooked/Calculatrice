@@ -20,223 +20,206 @@ let equal = document.querySelector('.buttonEqual');
 
 let displayResult = '';
 let factor = '';
-let lastResult = '';
-let beforeOperation = '';
 let entryAfterOperator = false;
 let pendingResult = '';
-console.log('**************')
-console.log('displayResult = ' + displayResult);
-console.log('factor = ' + factor);
-console.log('pendingResult = ' + pendingResult);
-console.log('entryAfterOperator = ' + entryAfterOperator);
-console.log('**************')
-console.log('lastResult = ' + lastResult);
-console.log('beforeOperation = ' + beforeOperation);
 
+equal.addEventListener('click', ()=>{
+    displayResult = result.innerHTML;
+    result.innerHTML = operation(pendingResult, factor, displayResult);
+    entryAfterOperator = false;
+    pendingResult = result.innerHTML;
+})
+
+AC.addEventListener('click', ()=>{
+    factor = '';
+    entryAfterOperator = false;
+    pendingResult = '';
+    result.innerHTML = '';
+})
 
 function operation(var1, factor, var2){
     return window.eval(parseFloat(var1) + factor + parseFloat(var2));
 }
+function isFloat(n) {
+    return Number(n) === n && n % 1 !== 0;
+}
 
-one.addEventListener('click', ()=>{
-    console.log('*****ONE*********')
-    console.log('displayResult = ' + displayResult);
-    console.log('factor = ' + factor);
-    console.log('pendingResult = ' + pendingResult);
-    console.log('entryAfterOperator = ' + entryAfterOperator);
-    console.log('********ONE******')
-    if(entryAfterOperator === false){
-        result.innerHTML += 1;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 1;
-        entryAfterOperator = false;
-    }
-    console.log('displayResult = ' + displayResult);
-    console.log('factor = ' + factor);
-    console.log('pendingResult = ' + pendingResult);
-    console.log('entryAfterOperator = ' + entryAfterOperator);
-    console.log('****END ONE**********')
-})
-two.addEventListener('click', ()=>{
-    console.log('*******TWO*******')
-    console.log('displayResult = ' + displayResult);
-    console.log('factor = ' + factor);
-    console.log('pendingResult = ' + pendingResult);
-    console.log('entryAfterOperator = ' + entryAfterOperator);
-    console.log('*******TWO*******')
-    if(entryAfterOperator === false){
-        result.innerHTML += 2;
-    } else {
-        result.innerHTML = '';
-        result.innerHTML += 2;
-        entryAfterOperator = false;
-    }
-    console.log('displayResult = ' + displayResult);
-    console.log('factor = ' + factor);
-    console.log('pendingResult = ' + pendingResult);
-    console.log('entryAfterOperator = ' + entryAfterOperator);
-    console.log('*****END TWO*********')
-})
 buttonPlus.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
-    if(factor!== '+'){
-        console.log('******PLUS********')
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-        console.log('**************')
+    if(factor!=='+' && factor !== ''){
         result.innerHTML = operation(pendingResult, factor, displayResult);
+        console.log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
         entryAfterOperator = true;
-        factor = '+';
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-        console.log('******PLUS********')
-    } else if(pendingResult === ''){
-        console.log('******PLUS********')
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-        console.log('*******PLUS*******')
         factor = '+';
         pendingResult = result.innerHTML;
-        entryAfterOperator = true;
-
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-        console.log('*****PLUS*********')
     } else {
-        console.log('******PLUS********')
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-        console.log('*****PLUS*********')
-        result.innerHTML = operation(pendingResult, factor, displayResult);
-        entryAfterOperator = true;
-        pendingResult = result.innerHTML;
-
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-        console.log('*****END PLUS*********')
+        if (pendingResult === '') {
+            factor = '+';
+            pendingResult = result.innerHTML;
+            entryAfterOperator = true;
+        } else {
+            result.innerHTML = operation(pendingResult, factor, displayResult);
+            console.log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
+            entryAfterOperator = true;
+            pendingResult = result.innerHTML;
+        }
     }
 })
 buttonMinus.addEventListener('click', ()=>{
-    console.log('**************')
-    console.log('displayResult = ' + displayResult);
-    console.log('factor = ' + factor);
-    console.log('pendingResult = ' + pendingResult);
-    console.log('entryAfterOperator = ' + entryAfterOperator);
-    console.log('**************')
     displayResult = result.innerHTML;
-    if(factor!== '-'){
-        console.log('**************')
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-
+    if(factor!=='-' && factor != ''){
         result.innerHTML = operation(pendingResult, factor, displayResult);
+        console.log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
         entryAfterOperator = true;
-        factor = '-';
-        console.log('**************')
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-        console.log('**************')
-    } else if(pendingResult === ''){
-        console.log('**************')
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-
         factor = '-';
         pendingResult = result.innerHTML;
-        entryAfterOperator = true;
-        console.log('**************')
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-        console.log('**************')
     } else {
-        console.log('**************')
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-        console.log('**************')
-        result.innerHTML = operation(pendingResult, factor, displayResult);
-        entryAfterOperator = true;
-        pendingResult = result.innerHTML;
-
-        console.log('displayResult = ' + displayResult);
-        console.log('factor = ' + factor);
-        console.log('pendingResult = ' + pendingResult);
-        console.log('entryAfterOperator = ' + entryAfterOperator);
-        console.log('**************')
+        if (pendingResult === '') {
+            factor = '-';
+            pendingResult = result.innerHTML;
+            entryAfterOperator = true;
+        } else {
+            result.innerHTML = operation(pendingResult, factor, displayResult);
+            console.log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
+            entryAfterOperator = true;
+            pendingResult = result.innerHTML;
+        }
     }
 })
+
 buttonMutiply.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
-    if(pendingResult === ''){
+    if(factor!=='*' && factor != ''){
+        result.innerHTML = operation(pendingResult, factor, displayResult);
+        console.log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
+        entryAfterOperator = true;
         factor = '*';
         pendingResult = result.innerHTML;
-        entryAfterOperator = true;
     } else {
-        result.innerHTML = operation(pendingResult, factor, displayResult);
-        entryAfterOperator = true;
-        pendingResult = result.innerHTML;
+        if (pendingResult === '') {
+            factor = '*';
+            pendingResult = result.innerHTML;
+            entryAfterOperator = true;
+        } else {
+            result.innerHTML = operation(pendingResult, factor, displayResult);
+            console.log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
+            entryAfterOperator = true;
+            pendingResult = result.innerHTML;
+        }
     }
 })
 buttonDivided.addEventListener('click', ()=>{
     displayResult = result.innerHTML;
-    if(pendingResult === ''){
+    if(factor!=='/' && factor != ''){
+        result.innerHTML = operation(pendingResult, factor, displayResult);
+        console.log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
+        entryAfterOperator = true;
         factor = '/';
         pendingResult = result.innerHTML;
-        entryAfterOperator = true;
     } else {
-        result.innerHTML = operation(pendingResult, factor, displayResult);
-        entryAfterOperator = true;
-        pendingResult = result.innerHTML;
+        if (pendingResult === '') {
+            factor = '/';
+            pendingResult = result.innerHTML;
+            entryAfterOperator = true;
+        } else {
+            result.innerHTML = operation(pendingResult, factor, displayResult);
+            console.log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
+            entryAfterOperator = true;
+            pendingResult = result.innerHTML;
+        }
     }
 })
-equal.addEventListener('click', ()=>{
-    displayResult = result.innerHTML;
-    if(factor === '+'){
-        result.innerHTML = add(pendingResult, displayResult);
-        console.log('plus');
-    } else if(factor === '-'){
-        result.innerHTML = retrieve(pendingResult, displayResult);
-        console.log('minus');
-    } else if(factor === '*'){
-        result.innerHTML = mutiply(pendingResult, displayResult);
-        console.log('*');
-    } else if(factor === '/'){
-        result.innerHTML = devide(pendingResult, displayResult);
-        console.log('/');
+one.addEventListener('click', ()=>{
+    if(entryAfterOperator === false){
+        result.innerHTML += 1;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += 1;
+        entryAfterOperator = false;
     }
-
 })
-
-
-
-
-AC.addEventListener('click', ()=>{
-    factor = '';
-    lastResult = '';
-    beforeOperation = '';
-    entryAfterOperator = false;
-    pendingResult = '';
-    result.innerHTML = '';
+two.addEventListener('click', ()=>{
+    if(entryAfterOperator === false){
+        result.innerHTML += 2;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += 2;
+        entryAfterOperator = false;
+    }
+})
+three.addEventListener('click', ()=>{
+    if(entryAfterOperator === false){
+        result.innerHTML += 3;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += 3;
+        entryAfterOperator = false;
+    }
+})
+four.addEventListener('click', ()=>{
+    if(entryAfterOperator === false){
+        result.innerHTML += 4;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += 4;
+        entryAfterOperator = false;
+    }
+})
+five.addEventListener('click', ()=>{
+    if(entryAfterOperator === false){
+        result.innerHTML += 5;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += 5;
+        entryAfterOperator = false;
+    }
+})
+six.addEventListener('click', ()=>{
+    if(entryAfterOperator === false){
+        result.innerHTML += 6;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += 6;
+        entryAfterOperator = false;
+    }
+})
+seven.addEventListener('click', ()=>{
+    if(entryAfterOperator === false){
+        result.innerHTML += 7;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += 7;
+        entryAfterOperator = false;
+    }
+})
+eight.addEventListener('click', ()=>{
+    if(entryAfterOperator === false){
+        result.innerHTML += 8;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += 8;
+        entryAfterOperator = false;
+    }
+})
+nine.addEventListener('click', ()=>{
+    if(entryAfterOperator === false){
+        result.innerHTML += 9;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += 9;
+        entryAfterOperator = false;
+    }
+})
+zero.addEventListener('click', ()=>{
+    if(entryAfterOperator === false){
+        result.innerHTML += 0;
+    } else {
+        result.innerHTML = '';
+        result.innerHTML += 0;
+        entryAfterOperator = false;
+    }
+})
+comma.addEventListener('click', ()=>{
+    if (!isFloat(parseFloat(result.innerHTML)))
+         result.innerHTML += '.';
 })
