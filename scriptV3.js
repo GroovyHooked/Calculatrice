@@ -36,7 +36,6 @@ function whichOperator(operator){
         entryAfterOperator = true;
     } else if(factor!== operator && factor !== ''){
         result.innerHTML = operation(pendingResult, factor, displayResult);
-        log('operation factor != = '+ pendingResult + ' '+factor +' '+ displayResult)
         entryAfterOperator = true;
         factor = operator;
         pendingResult = result.innerHTML;
@@ -47,7 +46,6 @@ function whichOperator(operator){
             entryAfterOperator = true;
         } else {
             result.innerHTML = operation(pendingResult, factor, displayResult);
-            log('operation factor = = '+ pendingResult + ' '+factor +' '+ displayResult)
             entryAfterOperator = true;
             pendingResult = result.innerHTML;
         }
